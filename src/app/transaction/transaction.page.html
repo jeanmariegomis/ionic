@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="logOut()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Transaction</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div class="ion-padding">
+        <ion-segment [(ngModel)]="relationship" color="primary" (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="envoie">
+            Envoie
+          </ion-segment-button>
+          <ion-segment-button value="retrait">
+            Retrait
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div [(ngSwitch)]="relationship">
+          <ion-list *ngSwitchCase="'envoie'">
+            <ion-card class="loginForm" *ngIf="!isLoading">
+            <ion-card-content>
+
+  <form [formGroup]="form" (ngSubmit)="onLogin(f.value)">
+
+  <ion-item>
+    <ion-label position="floating">Nom Expediteur</ion-label>
+    <ion-input type="text"  [(ngModel)]="loginUserData.nomexp" formControlName="nomexp" ></ion-input>
+  </ion-item>
+
+
+  <ion-item>
+      <ion-label position="floating">Prenom Expediteur</ion-label>
+      <ion-input type="text" [(ngModel)]="loginUserData.prenomexp" formControlName="prenomexp"></ion-input>
+    </ion-item>
+
+
+  <ion-item>
+      <ion-label position="floating">Telephone Expediteur</ion-label>
+      <ion-input type="text" [(ngModel)]="loginUserData.telexp" formControlName="telexp"></ion-input>
+    </ion-item>
+
+
+  <ion-item>
+      <ion-label position="floating">Montant Expediteur</ion-label>
+      <ion-input type="text" [(ngModel)]="loginUserData.montant" formControlName="montant" ></ion-input>
+    </ion-item>
+
+
+  <ion-item>
+      <ion-label position="floating">Nom Beneficiaire</ion-label>
+      <ion-input type="text" [(ngModel)]="loginUserData.nomben" formControlName="nomben" ></ion-input>
+    </ion-item>
+
+
+  <ion-item>
+      <ion-label position="floating">Prenom Beneficiaire</ion-label>
+      <ion-input type="text" [(ngModel)]="loginUserData.prenomben" formControlName="prenomben"></ion-input>
+    </ion-item>
+
+
+  <ion-item>
+      <ion-label position="floating">Telephone Beneficiaire</ion-label>
+      <ion-input type="text" [(ngModel)]="loginUserData.telben" formControlName="telben" ></ion-input>
+    </ion-item>
+
+
+  <ion-item>
+      <ion-label position="floating">CNi</ion-label>
+      <ion-input type="text" [(ngModel)]="loginUserData.cni" formControlName="cni"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-button (click)="loginUser()"  (click)="showAlert()" type="submit" expand="block" fill="outline" class="btnLogin">Envoyer</ion-button>
+    </ion-item>
+
+  </form>
+</ion-card-content>
+</ion-card>
+</ion-list>
+</div>
+
+<div [(ngSwitch)]="relationship">
+    <ion-list *ngSwitchCase="'retrait'">
+      <ion-card class="loginForm" *ngIf="!isLoading">
+      <ion-card-content>
+          <form [formGroup]="form"  (ngSubmit)="onLogin(f.value)">
+              <ion-item>
+                  <ion-label position="floating">Code</ion-label>
+                  <ion-input type="text" [(ngModel)]="loginUserData.code" formControlName="code" ></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label position="floating">Carte d'identite</ion-label>
+                  <ion-input type="text" [(ngModel)]="loginUserData.cni" formControlName="cni"></ion-input>
+              </ion-item>
+              <ion-button (click)="loginUser1()" (click)="showAlert1()" type="submit" expand="block" fill="outline" class="btnLogin">Retirer</ion-button>
+          </form>
+      </ion-card-content>
+    </ion-card>
+    </ion-list>
+  </div>
+</ion-content>
+
